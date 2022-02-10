@@ -1,10 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
+import { MetadataActions } from '../store/metadata.actions';
+import { MetadataState } from '../store/metadata.state';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  title = 'aaa';
+export class AppComponent implements OnInit {
+    constructor(private store: Store) {}
+
+    values: unknown[] = [];
+    b$ = this.store.select(MetadataState.metadata('1'));
+
+    ngOnInit() {
+        this.b$.subscribe((metadata) => this.values.push(JSON.stringify(String(metadata))));
+        this.store.dispatch(new MetadataActions.Load('1'));
+    }
 }
