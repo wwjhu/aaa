@@ -12,10 +12,10 @@ export class AppComponent implements OnInit {
     constructor(private store: Store) {}
 
     values: unknown[] = [];
-    b$ = this.store.select(MetadataState.metadata('1'));
+    metadata1$ = this.store.select(MetadataState.metadata('1'));
 
     ngOnInit() {
-        this.b$.subscribe((metadata) => this.values.push(JSON.stringify(String(metadata))));
+        this.metadata1$.subscribe((metadata) => this.values.push(JSON.stringify(metadata ?? String(metadata))));
         this.store.dispatch(new MetadataActions.Load('1'));
     }
 }

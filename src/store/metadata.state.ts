@@ -13,7 +13,7 @@ export interface MetadataStateModel {
     metadata: { [id: string]: Metadata };
 }
 
-export const METADATA_STATE_TOKEN = new StateToken<MetadataStateModel>('toggles');
+export const METADATA_STATE_TOKEN = new StateToken<MetadataStateModel>('metadata');
 
 @State<MetadataStateModel>({
     name: METADATA_STATE_TOKEN,
